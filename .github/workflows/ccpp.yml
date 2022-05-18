@@ -23,7 +23,6 @@ jobs:
       - name: Installing cmake, gcovr and boost on Ubuntu
         if: matrix.os == 'ubuntu-22.04'
         run: |
-          sudo apt-get update
           sudo apt-get install -y cmake gcovr libboost libboost-dev
       - name: Installing clang and clang tidy on Ubuntu
         if: matrix.compiler == 'clang' && matrix.os == 'ubuntu-22.04'
@@ -34,11 +33,16 @@ jobs:
         if: matrix.os == 'macOS-12'
         run: |
           brew install boost
+      - name: Update clang on macOS
+        if: matrix.compiler == 'clang' && matrix.os == 'macOS-12'
+        run: |
+          brew update
+          brew upgrade llvm
       - name: Installing lcov on macOS (clang)
         if: matrix.compiler == 'clang' && matrix.os == 'macOS-12'
         run: |
           brew install lcov
-      - name: Installing Gcovr on macOS (gcc)
+      - name: Installing gcovr on macOS (gcc)
         if: matrix.compiler == 'gcc' && matrix.os == 'macOS-12'
         run: |
           brew install gcovr
@@ -58,7 +62,7 @@ jobs:
             if [ "${{ matrix.os }}" = "ubuntu-20.04" ]; then
               CMAKE_CXX_COMPILER=clang++-12
             else
-              CMAKE_CXX_COMPILER=clang++-13
+              CMAKE_CXX_COMPILER=$(brew --prefix llvm)/bin/clang++
             fi
             cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_CPPCHECK=TRUE -DBUILD_CLANG_TIDY=TRUE -DCMAKE_CXX_COMPILER=$CMAKE_CXX_COMPILER
           fi
