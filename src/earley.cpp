@@ -15,11 +15,13 @@ using
 	std::endl;
 
 basic_ostream<char32_t>& operator<<(basic_ostream<char32_t>& ss, const char* c){
-	return ss << to_u32string(to_string_t(c));
+	for (char32_t ch : to_u32string(to_string_t(c))) ss << ch;
+	return ss;
 }
 
 basic_ostream<char32_t>& operator<<(basic_ostream<char32_t>& ss, const std::string& s){
-	return ss << to_u32string(to_string_t(s));
+	for (char32_t ch : to_u32string(to_string_t(s))) ss << ch;
+	return ss;
 }
 
 template<typename CharT>

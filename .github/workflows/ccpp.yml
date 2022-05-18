@@ -62,7 +62,7 @@ jobs:
             CMAKE_CXX_COMPILER=g++-11
             cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_CPPCHECK=TRUE -DBUILD_CLANG_TIDY=TRUE -DCMAKE_CXX_COMPILER=$CMAKE_CXX_COMPILER -DBUILD_CODE_COVERAGE=TRUE
           else
-            if [ "${{ matrix.os }}" = "ubuntu-20.04" ]; then
+            if [ "${{ matrix.os }}" = "ubuntu-22.04" ]; then
               CMAKE_CXX_COMPILER=clang++-12
             else
               CMAKE_CXX_COMPILER=$(brew --prefix llvm)/bin/clang++
