@@ -27,7 +27,7 @@ jobs:
       - name: Installing clang and clang tidy on Ubuntu
         if: matrix.compiler == 'clang' && matrix.os == 'ubuntu-22.04'
         run: |
-          sudo apt-get install -y clang clang-tidy
+          sudo apt-get install -y clang clang-tidy libboost1.74 libboost1.74-dev
 # macOS installations
       - name: Installing boost on macOS
         if: matrix.os == 'macOS-12'
