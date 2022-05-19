@@ -15,12 +15,12 @@ using
 	std::endl;
 
 basic_ostream<char32_t>& operator<<(basic_ostream<char32_t>& ss, const char* c){
-	for (char32_t ch : to_u32string(to_string_t(c))) ss << ch;
+	for (char32_t ch : to_u32string(to_string_t(c))) ss.put(ch);
 	return ss;
 }
 
 basic_ostream<char32_t>& operator<<(basic_ostream<char32_t>& ss, const std::string& s){
-	for (char32_t ch : to_u32string(to_string_t(s))) ss << ch;
+	for (char32_t ch : to_u32string(to_string_t(s))) ss.put(ch);
 	return ss;
 }
 
